@@ -27,7 +27,7 @@ for suit in SUIT_TUPLE:
 score = 50
 while True:
     print()
-    gameDeckList = shuffle(startingDeckList)
+    gameDeckList = shuffle(startingDeckList.copy())
     currentCardDict = getCard(gameDeckList)
     currentCardRank = currentCardDict['rank']
     currentCardSuit = currentCardDict['suit']
@@ -41,11 +41,21 @@ while True:
         if not gameDeckList:
             print("Brak wystarczającej liczby kart w talii. Runda zakończona.")
             break
-        answer = input("Czy następna karta będzie większa czy mniejsza niż " + currentCardRank + " " + currentCardSuit + "? Wpisz 'w' dla większa, 'm' dla mniejsza, 'q' aby zakończyć.\n")
+        prompt = (
+            f"Czy następna karta będzie większa czy mniejsza niż {currentCardRank} {currentCardSuit}?\n"
+            "Wpisz:\n"
+            "  'w' dla większa\n"
+            "  'm' dla mniejsza\n"
+            "  'q' aby zakończyć\n"
+        )
+        answer = input(prompt)
         answer = answer.casefold()
         if answer == 'q':
             print("Koniec gry. Twój końcowy wynik to:", score)
             exit()
+        if not gameDeckList:
+            print("Brak wystarczającej liczby kart w talii. Runda zakończona.")
+            break
         nextCardDict = getCard(gameDeckList)
         nextCardRank = nextCardDict['rank']
         nextCardSuit = nextCardDict['suit']

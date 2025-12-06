@@ -3,8 +3,8 @@
 import random
 
 #Stałe przedstawiające karty
-SUIT_TUPLE = ('pik', 'karo', 'trefl', 'kier')
-RANK_TUPLE = ('as', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'walet', 'dama', 'król')
+CARD_TYPE = ('pik', 'karo', 'trefl', 'kier')
+CARD_RANK = ('as', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'walet', 'dama', 'król')
 
 NCARDS = 8
 
@@ -19,18 +19,18 @@ def shuffle(deckListIn):
 
 print(f"Witaj w grze Większa lub mniejsza!\nZasady są proste. Musisz odgadnąć, czy kolejna karta będzie większa czy mniejsza od poprzedniej.\nJeżeli zgadniesz, zdobywasz 20 punktów. W przeciwnym razie tracisz 15 punktów.\n Na począek masz 50 punktów. \n")
 startingDeckList = []
-for suit in SUIT_TUPLE:
-    for thisValue, rank in enumerate(RANK_TUPLE):
-        cardDict = {'rank': rank, 'suit': suit, 'value': thisValue + 1}
+for cardType in CARD_TYPE:
+    for thisValue, rank in enumerate(CARD_RANK):
+        cardDict = {'rank': rank, 'type': cardType, 'value': thisValue + 1}
         startingDeckList.append(cardDict)
 
 score = 50
 while True:
     print()
-    gameDeckList = shuffle(startingDeckList.copy())
+    gameDeckList = shuffle(startingDeckList)
     currentCardDict = getCard(gameDeckList)
     currentCardRank = currentCardDict['rank']
-    currentCardSuit = currentCardDict['suit']
+    currentCardSuit = currentCardDict['type']
     currentCardValue = currentCardDict['value']
     print(f"Twoja pierwsza karta to {currentCardRank} {currentCardSuit}.\n")
 

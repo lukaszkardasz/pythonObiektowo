@@ -59,6 +59,14 @@ def withdraw(amountToWithdraw, password):
     return accountBalance
 
 
+def get_int_input(prompt):
+    value = input(prompt)
+    try:
+        return int(value)
+    except ValueError:
+        print('Błąd: Proszę podać prawidłową liczbę.')
+        return None
+
 newAccount("Jan", 100, 'soup')  # Utworzenie konta.
 
 while True:
@@ -81,11 +89,14 @@ while True:
         theBalance = getBalance(userPassword)
         if theBalance is not None:
             print('Wysokość salda wynosi:', theBalance)
+        else:
+            print('Nie udało się pobrać salda. Spróbuj ponownie.')
 
     elif action == 'd':
         print('Wpłata środków:')
-        userDepositAmount = input('Proszę podać kwotę wpłaty: ')
-        userDepositAmount = int(userDepositAmount)
+        userDepositAmount = get_int_input('Proszę podać kwotę wpłaty: ')
+        if userDepositAmount is None:
+            continue
         userPassword = input('Proszę podać hasło: ')
 
         newBalance = deposit(userDepositAmount, userPassword)
@@ -102,8 +113,9 @@ while True:
     elif action == 'w':
         print('Wypłata środków:')
 
-        userWithdrawAmount = input('Proszę podać kwotę wypłaty: ')
-        userWithdrawAmount = int(userWithdrawAmount)
+        userWithdrawAmount = get_int_input('Proszę podać kwotę wypłaty: ')
+        if userWithdrawAmount is None:
+            continue
         userPassword = input('Proszę podać hasło: ')
 
         newBalance = withdraw(userWithdrawAmount, userPassword)

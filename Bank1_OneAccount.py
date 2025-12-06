@@ -27,8 +27,51 @@ while True:
             print('Hasło jest nieprawidłowe.')
         else:
             print('Wysokość salda wynosi:', accountBalance)
-    
+
+    elif action == 'd':
+        print('Wpłata środków:')
+        userDepositAmount = input('Proszę podać kwotę wpłaty: ')
+        userDepositAmount = int(userDepositAmount)
+        userPassword = input('Proszę podać hasło: ')
+
+        if userDepositAmount < 0:
+            print('Kwota wpłaty musi być wartością dodatnią!')
+
+        elif userPassword != accountPassword:
+            print('Hasło jest nieprawidłowe.')
+
+        else:  # OK.
+            accountBalance = accountBalance + userDepositAmount
+            print('Wysokość salda po operacji wynosi:', accountBalance)
+
+    elif action == 's':  # Wyświetlenie informacji o koncie.
+        print('Informacje:')
+        print('       Imię', accountName)
+        print('       Saldo:', accountBalance)
+        print('       Hasło:', accountPassword)
+        print()
+
     elif action == 'q':
         break
+
+    elif action == 'w':
+        print('Wypłata środków:')
+
+        userWithdrawAmount = input('Proszę podać kwotę wypłaty: ')
+        userWithdrawAmount = int(userWithdrawAmount)
+        userPassword = input('Proszę podać hasło: ')
+
+        if userWithdrawAmount < 0:
+            print('Kwota wypłaty musi być wartością dodatnią.')
+
+        elif userPassword != accountPassword:
+            print('Hasło do tego konta jest nieprawidłowe.')
+
+        elif userWithdrawAmount > accountBalance:
+            print('Kwota wypłaty nie może być większa od wysokości salda.')
+
+        else:  #OK
+            accountBalance = accountBalance - userWithdrawAmount
+            print('Wysokość salda po operacji wynosi:', accountBalance)
 
 print('Gotowe')
